@@ -1,0 +1,25 @@
+{
+  "name": "oweather",
+  "version": "1.0.0",
+  "description": "weather",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oeso/Oweather.git"
+  },
+  "keywords": [
+    "weather"
+  ],
+  "author": "eunsun o",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oeso/Oweather/issues"
+  },
+  "homepage": "https://github.com/oeso/Oweather#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
