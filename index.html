@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" ng-app >
+    <head>
+        <meta charset="utf-8">
+        <title>Promise</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <script src="https://code.angularjs.org/1.4.5/angular.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-loader.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-mocks.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-resource.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-sanitize.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-touch.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-aria.js"></script>
+        <script src="https://code.angularjs.org/1.4.5/angular-route.js"></script>
+    </head>
+    <body>
+    <div ng-controller="ctrl">
+        <div>{{aaa}}</div><div>{{bbb}}</div>
+    </div>
+    <script>
+        function ctrl($scope,$q,$rootScope){
+            $scope.aaa = "Angular 정상 동작";
+            $rootScope.memberBaseInfo = "처음이름";
+
+
+            $timeout(function(){
+                $rootScope.memberBaseInfo = "강하늘";
+            },2000);
+            $rootScope.$watch('memberBaseInfo',function(o){
+                if(!o){
+                    console.log("없음!!!!!");
+                }else{
+                    console.log(o)
+                    console.log($rootScope.memberBaseInfo)
+                }
+            })
+
+
+            var deferred = $q.defer();
+            console.log(deferred)
+
+            var fetchUser = function() {
+                // 비동기 호출 후에 응답 값을 전달하면서 deferred.resolve를 호출함.
+                deferred.resolve(user);
+                // 에러가 날 경우 다음을 호출함.
+                deferred.reject('실패 사유');
+            }
+                // 마찬가지로, fetchUserPermissions과 fetchUserListData가 처리됨.
+            deferred.promise.then(fetchUser)
+                .then(bbbb)
+                .then(cccc)
+                .then(function(list) {
+                    // 여기엔 데이터 리스트를 사용한 기능 수행 코드를 넣자.
+                    }, function(errorReason) {
+                    // 어느 단계에든 에러가 있으면 한번에 처리하는 코드를 여기에 넣자.
+                    }
+                );
+        }
+    </script>
+    </body>
+</html>
