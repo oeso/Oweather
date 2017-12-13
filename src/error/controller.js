@@ -1,4 +1,7 @@
-/**
- * Error
- * Created by ottori on 2017-06-30.
- */
+
+/* error */
+angular.module('oweather')
+    .controller('errorCtrl',['$scope', '$rootScope', '$window', '$routeParams', '$http', '$location', function($scope, $rootScope, $window, $routeParams, $http, $location){
+
+
+    }])
