@@ -9,7 +9,7 @@ function startBtnDisplay(bool){
 };
 
 /* angular module */
-sportsangular.module('oweather')
+angular.module('oweather')
     .controller('wrap', [ '$scope', '$location', '$http', function($scope, $location, $http ) {
 
         window.fbAsyncInit = function() {

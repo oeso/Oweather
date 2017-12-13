@@ -2,34 +2,33 @@
 <html lang="en" ng-app="oweather">
 <head>
     <meta charset="UTF-8">
-    <title>{{gnbInfo.title}}</title>
+    <title>{{doc.title}}</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="shotcut icon" href="images/icon_oweather.png">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shotcut icon" href="http://ottorii.cafe24.com/tn/public/stat/images/tn_favicon.png">
 </head>
 <body>
-    <div id="fb-root"></div>
-    <!--<script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.9&appId=1498390546894034";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
--->
+    <h1 class="hide">O Weather</h1>
+
+    <!-- include header -->
+    <div ng-include="'include/header.html'"></div>
+    <!-- //include header -->
+
+    <!-- include lnb -->
+    <div ng-include="'include/lnb.html'"></div>
+    <!-- //include lnb -->
+
     <div ng-controller="wrap">
         <div ng-view></div>
     </div>
 
-    <script src="https://o.gzcdn.net/mui/js/highcharts_standalone_v4.1.4.js"></script>
-    <script src="https://o.gzcdn.net/mui/js/highcharts_v4.1.4.1.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-aria.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-loader.js"></script>
-    <script src="https://code.angularjs.org/1.4.6/angular-mocks.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-resource.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-route.js"></script>
     <script src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="script/ottorichart.js"></script>
 
     <script src="base/config.js"></script>
     <script src="base/appInfo.js"></script>
@@ -38,11 +37,11 @@
     <!--<script src="build/result.js"></script>-->
 
     <!-- 개발시 script -->
-    <script src="account/controller.js"></script>
-    <script src="feedlist/controller.js"></script>
-    <script src="login/controller.js"></script>
-    <script src="login/loginSuccessController.js"></script>
-    <script src="reservation/controller.js"></script>
-    <script src="reservationSuccess/controller.js"></script>
+    <script src="main/controller.js"></script>
+    <script src="alarm/controller.js"></script>
+    <script src="add/controller.js"></script>
+    <script src="search/controller.js"></script>
+    <script src="info/controller.js"></script>
+    <script src="agreement/controller.js"></script>
 </body>
 </html>

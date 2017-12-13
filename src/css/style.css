@@ -75,7 +75,7 @@ caption {line-height:0; color:transparent; font-size:0; height:0; text-indent:-8
 .account-repeat {display:inline-block; line-height:1; font-size:16px; padding:2px 5px; margin-right:5px; background:#eee; border-radius:2px}
 
 /* header */
-.header {position:relative; padding:10px 20px 9px; border-bottom:2px solid #666; background:#333; color:#fff}
+.header {position:relative; padding:10px 20px 9px}
 .btn-menu {vertical-align:middle; padding:8px 10px 6px; color:#86bf3a; border:1px solid #86bf3a; border-radius:2px; font-weight:bold; letter-spacing:1px; font-size:16px}
 .email {position:relative; top:2px; font-size:16px}
 .header .pic {width:36px; height:36px; margin-left:10px; border-radius:50%; vertical-align:middle}

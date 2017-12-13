@@ -8,105 +8,52 @@ function startBtnDisplay(bool){
     };
 };
 
-/* angular module */
-sportsangular.module('oweather')
-    .controller('wrap', [ '$rootScope', '$scope', '$location', '$http', function($rootScope, $scope, $location, $http ) {
 
-        $rootScope.gnbInfo = {title:'타이틀'};
+/* route */
+angular.module( 'oweather', ['ngRoute'])
+    .config(['$routeProvider', function($routeProvider) {
 
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1752200768352421',
-                cookie     : true,  // enable cookies to allow the server to access
-                xfbml      : true,  // parse social plugins on this page
-                version    : 'v2.8' // use graph api version 2.8
-            });
-            FB.getLoginStatus(function(response) { //문서 로드되자마자 페이스북 로그인 여부 확인
-                if (response.status === 'connected') {
-                    console.log("facebook 로그인 상태임");
-                    FB.api('/me', {fields:'events,videos,about,education,favorite_athletes,hometown,work,groups,religion,birthday, email,first_name, last_name,music, age_range, picture, likes, gender, languages,link, locale, name, cover'}, function(response){
-                        if(!response || response.error){
-                            if( cnt >= 10 ){ return false; }
-                            call();
-                            cnt++;
-                        }else{
-                            console.log( "성공.response 값 : ", response );
-                            $scope.headers(response);
-                            $scope.accountLoad(response);
-                            $scope.useremail = response.email;
-                            feedCall();
-                            console.log(response)
-                        };
-                    });
-                    if (document.getElementsByClassName("login")[0]) {
-                        startBtnDisplay(true);
-                    };
-                } else {
-                    console.log('facebook 미로그인 상태임');
-                    document.location.href = document.location.origin + "/#/login"; //login 화면으로 이동
-                    if (document.getElementsByClassName("login")[0]) {
-                        startBtnDisplay(false);
-                    };
-                };
+        $routeProvider
+            .when('/', {templateUrl: 'main/template.html', controller: 'mainCtrl'})
+            .when('/main', {templateUrl: 'main/template.html', controller: 'mainCtrl'})
+            .when('/add', {templateUrl: 'add/template.html', controller: 'addCtrl'})
+            .when('/search', {templateUrl: 'search/template.html', controller: 'searchCtrl'})
+            .when('/alarm', {templateUrl: 'alarm/template.html', controller: 'alarmCtrl'})
+            .when('/agreement', {templateUrl: 'agreement/template.html', controller: 'agreementCtrl'})
+            .when('/info', {templateUrl: 'info/template.html', controller: 'infoCtrl'})
+            .when('/error', {templateUrl: 'error/error.html'})
 
-            });
-            var cnt = 0;
+            .otherwise({redirectTo: '/error'});
 
-            function feedCall(){
-                FB.api( '/me/feed', function (response) {
-                    if(response){
-                        $scope.feedListLoad(response);//피드 리스트 클릭시 우측에 데이터 바인딩하는 함수 호출
-                        $scope.feedOpenLoad(response.data[0]);//최초 로드시 컨텐츠 영역에 가장 최근 게시물을 뿌림
-                    };
-                });
-                FB.api( '/me/groups', function (response) {
-                    console.log("groups ::::", response)
-                });
-                FB.api( '/me/videos', function (response) {
-                    console.log("videos ::::", response)
-                });
-                /*FB.api( '/me/photos', function (response) {
-                    console.log("photos ::::", response);
-                    $scope.photoSet(response.data)
-                });*/
-                FB.api( '/me/books', function (response) {
-                    console.log("books ::::", response)
-                });
-            };
-        };
+        //$locationProvider.html5Mode(true);
 
-        $scope.goLoginPage = function(){
-            console.log($location.url)
-            $location.url = '/login';
-        };
+    }]);
 
-        /* feed list page */
-        $scope.feedListLoad = function(response){
-            $scope.feeds = response.data;
-            $scope.$apply();
-        };
-        //피드 리스트 클릭시 우측에 데이터 바인딩하는 함수
-        $scope.feedOpen = function(){
-            if(!this.item.story){
-                $scope.feedTitle = "게시글";
-            }else{
-                $scope.feedTitle = this.item.story;
+/* factory 등록시 주의 사항 : 아래와 같이 angular.module( 'oweather') 와 같이 써야 함. angular.module( 'oweather', ['$window', ...]) <- 여기에 종속물 넣으면 동작 안함 */
+angular.module( 'oweather')
+    .factory('oweather-api', ['$window','$http', function($window, $http) {
+        return {
+            academyMessages : {
+                networkGetFail: '데이터 로드중 오류가 발생했습니다. 네트워크 상태 확인 후 다시 시도해주세요.',
+                networkSetFail: '저장중 오류가 발생했습니다. 네트워크 상태 확인 후 다시 시도해주세요.',
+                bookSetFail: '타석예약도중 오류가 발생했습니다. 네트워크 상태 확인 후 다시 시도해주세요.',
+                lessonMemoNoPreData: '이전 작성된 레슨메모가 없습니다.',
+                lessonMemoNoNextData: '이후 작성된 레슨메모가 없습니다.',
+                lessonMemoRequireMemo: '연습 메모를 작성해 주세요.',
+                noLessonData: '레슨 데이터가 없습니다.',
+                noNasmoData: '나스모 데이터가 없습니다.',
+                noOrderData: '구매 이력이 없습니다.',
+                noGraphData: '연습데이터 로드 중 오류가 발생하였습니다. 잠시 후 다시 이용하세요'
             }
-            $scope.feedContents = this.item.message;
-            $scope.feedDate = this.item.created_time;
-        };
-        //최초 로드시 컨텐츠 영역에 가장 최근 게시물을 뿌림
-        $scope.feedOpenLoad = function(res){
-            $scope.feedTitle = res.story;
-            $scope.feedContents = res.message;
-            $scope.feedDate = res.created_time;
-            $scope.feedPhotos = res.created_time;
-            $scope.$apply();
         }
+    }]);
 
-        $scope.names = 'Name';
-        $scope.userPic = 'https://s3.amazonaws.com/whisperinvest-images/default.png';
-        $scope.userMail = 'user@mail.com';
+/* angular module */
+angular.module('oweather')
+    .controller('wrap', [ '$rootScope', '$scope', '$location', '$http', function($rootScope, $scope, $location, $http ) {
+        $rootScope.doc = {
+            title:'2Depth | 1Depth | AppName'
+        };
 
         $scope.headers = function(response){
             $scope.userPic = response.picture.data.url;
@@ -114,32 +61,6 @@ sportsangular.module('oweather')
             $scope.$apply();
         };
 
-        $scope.accountLoad = function(response){
-            $scope.picture = response.picture.data.url;
-            $scope.first_name = response.first_name;
-            $scope.last_name = response.last_name;
-            $scope.nation = response.locale;
-            $scope.email = response.email;
-            $scope.name = response.name;
-            $scope.gender = response.gender;
-            $scope.languages = response.languages;
-            $scope.music = response.music.data;
-            $scope.linkss = response.link;
-            $scope.likes = response.likes.data;
-            $scope.cover = response.cover.source;
-            $scope.age_range = response.age_range.min + "세 이상";
-            $scope.$apply();
-        };
-
-        /* facebook 공유 */
-        $scope.reserv_share = function(){
-            if(confirm("예약내용을 페이스북에 게시할까요?")){
-                var reserveText = angular.element(document.querySelector('#share_list')).text();
-                FB.api('/me/feed', 'post', {
-                    message: reserveText
-                });
-            };
-        };
 
         //LNB OPEN
         $scope.lnbOpen = function(){
@@ -168,5 +89,3 @@ sportsangular.module('oweather')
 
         }
     }])
-
-
