@@ -1,13 +1,3 @@
-function startBtnDisplay(bool){
-    if(bool){
-        document.getElementById("startApp").style.display = "none";
-        document.getElementById("loginFacebook").style.display = "block";
-    }else{
-        document.getElementById("startApp").style.display = "none";
-        document.getElementById("loginFacebook").style.display = "block";
-    };
-};
-
 
 /* route */
 angular.module( 'oweather',  [ 'ngRoute'])
@@ -27,32 +17,53 @@ angular.module( 'oweather',  [ 'ngRoute'])
 
         //$locationProvider.html5Mode(true);
 
-    }]);
+    }])
+    .factory('oweather-api', ['$window','$rootScope','$http', function($window, $rootScope, $http) {
+        /* factory 등록시 주의 사항 : 아래와 같이 angular.module( 'oweather') 와 같이 써야 함. angular.module( 'oweather', ['$window', ...]) <- 여기에 종속물 넣으면 동작 안함 */
+        //SK open api uri 표준 : http(s)://apis.skplanetx.com/[Service Area]/[Resource Category]/{Resource Path}/../{Path Variable} ?{Query String}
 
-/* factory 등록시 주의 사항 : 아래와 같이 angular.module( 'oweather') 와 같이 써야 함. angular.module( 'oweather', ['$window', ...]) <- 여기에 종속물 넣으면 동작 안함 */
-angular.module( 'oweather')
-    .factory('oweather-api', ['$window','$http', function($window, $http) {
-        var ow = 123;
+        //TODO: proxyCallback 보강필요 (timeout 처리 등등...)
+        function proxyCallback(callback) {
+            return function (res) {
+                console.log(res)
+                if (res.status < 200 || res.status >= 300) {
+                    return callback(res);
+                }
+                if (!res.data) {
+                    callback({message: 'no data!'});
+                }
+                return callback(null, res.data);
+            };
+        }
+        $rootScope.proxyCallback = proxyCallback;
 
-        function nowTemper(callback, params, url){
-            var rest = "";
+        var proxyCallback = $rootScope.proxyCallback;
+
+        function nowTemper(callback, param){
+            //var version, lat, lon, city, county, village;
+            param.city="";
+            param.county="";
+            param.village="";
+            var rest = "http://apis.skplanetx.com/weather/current/hourly?version=1&lat=37.4870600000&lon=127.0460400000";
             var req = {
                 method : "GET",
                 url : rest,
-                params : params,
-                timeout : HTTP_TIMEOUT
+                headers : {
+                    Accept : "application/json",
+                    appKey : "3a0006df-8fa2-3f8d-aff2-d19f4c2209f1"
+                }
             };
-            if(url){ req.url = url };
             $http(req).then(proxyCallback(callback))
+        };
+
+        return {
+            nowTemper : nowTemper
         }
-
-
-        return ow
-    }]);
-
-/* angular module */
-angular.module('oweather')
+    }])
     .controller('wrap', [ '$rootScope', '$scope', '$location', '$http', function($rootScope, $scope, $location, $http ) {
+        $rootScope.proxyCallback = function(ar){
+            console.log("wrap")
+        }
         $rootScope.doc = {
             title:'2Depth | 1Depth | AppName'
         };
