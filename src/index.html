@@ -7,7 +7,8 @@
     <link rel="shotcut icon" href="images/icon_oweather.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body ng-controller="commonCtrl">
+    <div class="dim" ng-if="layerStat" ng-click="asideOut($event)"></div>
     <h1 class="hide">O Weather</h1>
 
     <!-- include header -->
@@ -18,9 +19,7 @@
     <div ng-include="'include/lnb.html'"></div>
     <!-- //include lnb -->
 
-    <div ng-controller="wrap">
-        <div data-ng-view></div>
-    </div>
+    <div data-ng-view></div>
 
     <script src="https://code.angularjs.org/1.4.6/angular.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-aria.js"></script>
@@ -28,11 +27,11 @@
     <script src="https://code.angularjs.org/1.4.6/angular-resource.js"></script>
     <script src="https://code.angularjs.org/1.4.6/angular-route.js"></script>
     <script src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <script src="script/common.js"></script>
     <script src="script/ottorichart.js"></script>
 
     <script src="base/config.js"></script>
     <script src="base/appInfo.js"></script>
+    <script src="script/common.js"></script>
 
     <!-- live 나갈 때는 아래 result.js로 빌드해서 나감 -->
     <!--<script src="build/result.js"></script>-->

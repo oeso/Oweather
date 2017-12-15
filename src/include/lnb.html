@@ -1,15 +1,14 @@
-<aside id="aside" class="aside" ng-class="lnbToggle">
+<aside id="aside" class="aside" ng-if="lnbStat">
     <div class="top">
-        <h2 class="aside__title">oweather</h2>
-        <button class="aside__close" id="close" ng-click="lnbClose()">Close</button>
+        <h2 class="aside__title"><a href="#/main">oweather</a></h2>
     </div>
 
     <div class="aside__nav">
-        <a class="aside__nav--btn" href="#/add">Add Location</a>
-        <a class="aside__nav--btn" href="#/alarm">Alarm</a>
-        <a class="aside__nav--btn" href="#/share">Share</a>
-        <a class="aside__nav--btn" href="#/search">Search</a>
-        <a class="aside__nav--btn" href="#/agreement">Agreement</a>
-        <a class="aside__nav--btn" href="#/info">Info</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/add">Add Location</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/alarm">Alarm</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/share">Share</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/search">Search</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/agreement">Agreement</a>
+        <a class="aside__nav--btn" ng-click="lnbMove()" href="#/info">Info</a>
     </div>
 </aside>

@@ -1,8 +1,18 @@
 
 <section class="main">
-    <h2>oweather main</h2>
+    <h2>현재 날씨</h2>
 
-    <div>온도 : {{nowState}}</div>
-    <div>설명 : {{explain}}</div>
+    <div class="main_weather">
+        <div class="main_weather-ico"><img ng-src="/images/icon/{{skyCode}}.png" alt=""></div>
+        <div class="main_weather-now">{{nowData.temperature.tc | number : 0}}<span class="temp_unit">&#176;</span></div>
+
+        <div class="main_weather-minmax">최고 {{nowData.temperature.tmax | number : 0}} &#176;</div>
+        <div class="main_weather-minmax">최저 {{nowData.temperature.tmin | number : 0}} &#176;</div>
+        <div>{{nowData.sky.name}}</div>
+    </div>
     <div>미세먼지 : {{dust}}</div>
+
+    <div>
+        <span class=""></span>
+    </div>
 </section>
