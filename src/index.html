@@ -7,8 +7,8 @@
     <link rel="shotcut icon" href="images/icon_oweather.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-controller="commonCtrl">
-    <div class="dim" ng-if="layerStat" ng-click="asideOut($event)"></div>
+<body ng-controller="commonCtrl" class="body" ng-style="{'background-image':'url(images/bg/'+presentStats+'.jpg)'}">
+    <div class="dim" ng-if="dimState" ng-click="asideOut($event)"></div>
     <h1 class="hide">O Weather</h1>
 
     <!-- include header -->

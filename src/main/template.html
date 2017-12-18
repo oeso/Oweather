@@ -1,18 +1,19 @@
 
 <section class="main">
-    <h2>현재 날씨</h2>
+    <h2>서울</h2>
 
     <div class="main_weather">
         <div class="main_weather-ico"><img ng-src="/images/icon/{{skyCode}}.png" alt=""></div>
         <div class="main_weather-now">{{nowData.temperature.tc | number : 0}}<span class="temp_unit">&#176;</span></div>
 
-        <div class="main_weather-minmax">최고 {{nowData.temperature.tmax | number : 0}} &#176;</div>
-        <div class="main_weather-minmax">최저 {{nowData.temperature.tmin | number : 0}} &#176;</div>
-        <div>{{nowData.sky.name}}</div>
-    </div>
-    <div>미세먼지 : {{dust}}</div>
 
-    <div>
-        <span class=""></span>
+        <div class="main_weather-minmax">{{nowData.temperature.tmax | number : 0}} &#176; / {{nowData.temperature.tmin | number : 0}} &#176;</div>
+        <div class="main_weather-ment">{{nowData.sky.name}}</div>
     </div>
+
+    <div class="main_weather-sub">
+        <div class="main_weather-wind">풍속 : {{nowData.wind.wspd}}m/s</div>
+        <div class="main_weather-wind">풍향 : {{nowData.wind.wdir}}</div>
+    </div>
+
 </section>

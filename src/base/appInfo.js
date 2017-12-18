@@ -56,6 +56,10 @@ angular.module( 'oweather',  [ 'ngRoute'])
             $http(req).then(proxyCallback(callback))
         };
 
+
+
+
+
         return {
             nowTemper : nowTemper
         }
