@@ -88,7 +88,6 @@ angular.module('oweather')
             }
         },{
             version:1, lat : userlat , lon: userlon
-    });
-        console.log($scope.skyCode)
-;
+        });
+        console.log($scope.skyCode);
     }])
