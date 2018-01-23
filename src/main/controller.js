@@ -9,9 +9,18 @@ angular.module('oweather')
         //호출 방식2 : 시군구 정보로 호출
 
         $scope.nowData;
-        $scope.skyCode;
+        $scope.skyCode = "";
+        console.log(2)
 
+<<<<<<< HEAD
 
+=======
+        //사용자 설정 위/경도
+        var userlat = "37.4870600000",
+            userlon = "127.0460400000";
+        
+        
+>>>>>>> aa72a03edf9283f45fae3a66ede0644b08f03dc3
         //현재 시간이 낮시간 또는 밤 시간인지에 따라서 다른 icon이 노출되어야 함.
 
         //시간대 별 api 호출
@@ -19,71 +28,72 @@ angular.module('oweather')
             $scope.nowData = o.weather.hourly[0];
             switch($scope.nowData.sky.code){
                 case "SKY_O01" :
-                    $scope.skyCode = 08;
+                    $scope.skyCode = "08";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 01;
+                        $scope.skyCode = "01";
                     }
                     break;
                 case "SKY_O02" :
-                    $scope.skyCode = 9;
+                    $scope.skyCode = "09";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 2;
+                        $scope.skyCode = "02";
                     }
                     break;
                 case "SKY_O03" :
-                    $scope.skyCode = 10;
+                    $scope.skyCode = "10";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 3;
+                        $scope.skyCode = "03";
                     }
                     break;
                 case "SKY_O04" :
-                    $scope.skyCode = 40;
+                    $scope.skyCode = "40";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 12;
+                        $scope.skyCode = "12";
                     }
                     break;
                 case "SKY_O05" :
-                    $scope.skyCode = 41;
+                    $scope.skyCode = "41";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 13;
+                        $scope.skyCode = "13";
                     }
                     break;
                 case "SKY_O06" :
-                    $scope.skyCode = 42;
+                    $scope.skyCode = "42";
                     if($rootScope.presentTime){
-                        $scope.skyCode = 14;
+                        $scope.skyCode = "14";
                     }
                     break;
                 case "SKY_O07" :
-                    $scope.skyCode = 18;
+                    $scope.skyCode = "18";
                     break;
                 case "SKY_O08" :
-                    $scope.skyCode = 21;
+                    $scope.skyCode = "21";
                     break;
                 case "SKY_O09" :
-                    $scope.skyCode = 32;
+                    $scope.skyCode = "32";
                     break;
                 case "SKY_O10" :
-                    $scope.skyCode = 4;
+                    $scope.skyCode = "04";
                     break;
                 case "SKY_O11" :
-                    $scope.skyCode = 29;
+                    $scope.skyCode = "29";
                     break;
                 case "SKY_O12" :
-                    $scope.skyCode = 26;
+                    $scope.skyCode = "26";
                     break;
                 case "SKY_O13" :
-                    $scope.skyCode = 27;
+                    $scope.skyCode = "27";
                     break;
                 case "SKY_O14" :
-                    $scope.skyCode = 28;
+                    $scope.skyCode = "28";
                     break;
 
-                default : $scope.skyCode = 38;
+                default : $scope.skyCode = "38";
             }
         },{
-            version:1, lat : "37.4870600000" , lon: "127.0460400000"
+            version:1, lat : userlat , lon: userlon
         });
+<<<<<<< HEAD
 
     }])
     .directive('dirct', function(){
@@ -104,3 +114,7 @@ angular.module('oweather')
             }
         }
     })
+=======
+        console.log($scope.skyCode);
+    }])
+>>>>>>> aa72a03edf9283f45fae3a66ede0644b08f03dc3
