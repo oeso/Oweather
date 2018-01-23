@@ -11,6 +11,7 @@ angular.module('oweather')
         $scope.nowData;
         $scope.skyCode;
 
+
         //현재 시간이 낮시간 또는 밤 시간인지에 따라서 다른 icon이 노출되어야 함.
 
         //시간대 별 api 호출
@@ -84,5 +85,22 @@ angular.module('oweather')
             version:1, lat : "37.4870600000" , lon: "127.0460400000"
         });
 
-;
     }])
+    .directive('dirct', function(){
+        return {
+            restrict : "A",
+            scope : {
+                localScope : "=",
+                dirctScope : "=",
+                stScope : "="
+            },
+            //template : "<div>hi there~ , it's my directive</div>",
+            replace : true,
+            link : function(scope){
+                console.log("scope :", scope)
+                scope.localScope = {};
+                scope.localScope.name = "Name!!!!";
+
+            }
+        }
+    })

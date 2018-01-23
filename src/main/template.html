@@ -1,4 +1,4 @@
-
+<style>.on {color:red}</style>
 <section class="main">
     <h2>현재 날씨</h2>
 
@@ -12,7 +12,8 @@
     </div>
     <div>미세먼지 : {{dust}}</div>
 
-    <div>
-        <span class=""></span>
+    <div dirct dirctScope localScope ng-class="true ? 'on' : ''" date-value="localScope.name" >
+        <span class="">디렉티브 내부</span>
+
     </div>
 </section>

@@ -48,8 +48,6 @@ angular.module('oweather')
     $rootScope.doc = {};
     $rootScope.lnbStat = false;
     $rootScope.layerStat = false;
-console.log(angular.element( document.querySelector("#aside")    )   )
-    console.log( document.querySelector("#aside")  )
 
     //LNB OPEN
     $rootScope.lnbOpen = function(){

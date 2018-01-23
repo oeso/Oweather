@@ -25,7 +25,7 @@ angular.module( 'oweather',  [ 'ngRoute'])
         //TODO: proxyCallback 보강필요 (timeout 처리 등등...)
         function proxyCallback(callback) {
             return function (res) {
-                console.log(res)
+
                 if (res.status < 200 || res.status >= 300) {
                     return callback(res);
                 }
